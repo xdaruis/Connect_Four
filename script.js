@@ -21,7 +21,7 @@ const winnerCombos = [
     ["b1", "c2", "d3", "e4"],
     ["b1", "b2", "b3", "b4"],
     ["b2", "c2", "d2", "e2"],
-    ["b2", "c3", "d4", "e5"],
+    ["b2", "c3", "d4", "e5"], //20
     ["b2", "b3", "b4", "b5"],
     ["b3", "c3", "d3", "e3"],
     ["b4", "c4", "d4", "e4"],
@@ -32,7 +32,7 @@ const winnerCombos = [
     ["c0", "c1", "c2", "c3"],
     ["c1", "d1", "e1", "f1"],
     ["c1", "d2", "e3", "f4"],
-    ["c1", "c2", "c3", "c4"],
+    ["c1", "c2", "c3", "c4"], //10
     ["c2", "d2", "e2", "f2"],
     ["c2", "d3", "e4", "f5"],
     ["c2", "c3", "c4", "c5"],
@@ -43,7 +43,7 @@ const winnerCombos = [
     ["d0", "e0", "f0", "g0"],
     ["d0", "e1", "f2", "g3"],
     ["d0", "d1", "d2", "d3"],
-    ["d1", "e1", "f1", "g1"],
+    ["d1", "e1", "f1", "g1"], // 10
     ["d1", "e2", "f3", "g4"],
     ["d1", "d2", "d3", "d4"],
     ["d2", "e2", "f2", "g2"],
@@ -54,7 +54,7 @@ const winnerCombos = [
     ["d5", "e5", "f5", "g5"],
 
     ["d0", "c1", "b2", "a3"],
-    ["d1", "c2", "b3", "a4"],
+    ["d1", "c2", "b3", "a4"], //10
     ["d2", "c3", "b4", "a5"],
 
     ["e0", "d1", "c2", "b3"],
@@ -67,7 +67,7 @@ const winnerCombos = [
     
     ["f0", "e1", "d2", "c3"],
     ["f1", "e2", "d3", "c4"],
-    ["f2", "e3", "d4", "c5"],
+    ["f2", "e3", "d4", "c5"],//10
     
     ["f0", "f1", "f2", "f3"],
     ["f1", "f2", "f3", "f4"],
@@ -79,9 +79,24 @@ const winnerCombos = [
     
     ["g0", "g1", "g2", "g3"],
     ["g1", "g2", "g3", "g4"],
-    ["g2", "g3", "g4", "g5"],
-    
+    ["g2", "g3", "g4", "g5"], //9
 ];
+
+const WIN_POSIBILITIES = 69;
+
+function isWinner() {
+    for (let i = 0; i < WIN_POSIBILITIES; ++i) {
+        let hasWon = true;
+        for (let j = 0; j < 4; ++j) {
+            if (!dict["moves" + player].includes(winnerCombos[i][j])) {
+                hasWon = false;
+            }
+        }
+        if (hasWon) {
+            alert("WOWOWWOWO");
+        }
+    }
+}
 
 const movesYellow = [], movesBlue = [];
 
@@ -107,6 +122,7 @@ function colorButton(element) {
     dict["moves" + player].push(element.id);
     // alert("HI");
     // alert(dict["moves" + player]);
+    isWinner();
     player = dict[player];
     activateAboveButton(element);
 }
