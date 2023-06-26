@@ -80,11 +80,21 @@ const winnerCombos = [
     ["g2", "g3", "g4", "g5"],
 ];
 
-const movesYellow = [], movesBlue = [];
 const WIN_COMBINATIONS = 69;
+const movesYellow = [], movesBlue = [];
+
+let player = "btn btn-warning";
 let moves = 42;
 let gameState = true;
-let player = "btn btn-warning";
+
+const dict = {
+    "movesbtn btn-warning": movesYellow,
+    "movesbtn btn-primary": movesBlue,
+    "colorbtn btn-warning": "Blue",
+    "colorbtn btn-primary": "Yellow",
+    "btn btn-warning": "btn btn-primary",
+    "btn btn-primary": "btn btn-warning"
+};
 
 function isWinner() {
     for (let i = 0; i < WIN_COMBINATIONS; ++i) {
@@ -105,15 +115,6 @@ function isWinner() {
         document.getElementById("playerMove").innerHTML = "Draw!";
     }
 }
-
-const dict = {
-    "movesbtn btn-warning": movesYellow,
-    "movesbtn btn-primary": movesBlue,
-    "colorbtn btn-warning": "Blue",
-    "colorbtn btn-primary": "Yellow",
-    "btn btn-warning": "btn btn-primary",
-    "btn btn-primary": "btn btn-warning"
-};
 
 function activateAboveButton(element) {
     let aboveId = element.id;
