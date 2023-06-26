@@ -92,6 +92,7 @@ function isWinner() {
         for (let j = 0; j < 4; ++j) {
             if (!dict["moves" + player].includes(winnerCombos[i][j])) {
                 hasWon = false;
+                break;
             }
         }
         if (hasWon) {
