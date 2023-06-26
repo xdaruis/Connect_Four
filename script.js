@@ -83,6 +83,8 @@ const winnerCombos = [
 ];
 
 const WIN_POSIBILITIES = 69;
+let moves = 42;
+let gameState = true;
 
 function isWinner() {
     for (let i = 0; i < WIN_POSIBILITIES; ++i) {
@@ -93,8 +95,13 @@ function isWinner() {
             }
         }
         if (hasWon) {
-            alert("WOWOWWOWO");
+            document.getElementById("playerMove").innerHTML = dict["color" + dict[player]] + " has won!";
+            gameState = false;
         }
+    }
+    if (--moves === 0 && gameState) {
+        gameState = false;
+        document.getElementById("playerMove").innerHTML = "Draw!";
     }
 }
 
@@ -116,6 +123,10 @@ function activateAboveButton(element) {
 }
 
 function colorButton(element) {
+    if (!gameState) {
+        return;
+    }
+    element.disabled = true;
     element.innerHTML = "&nbsp;&nbsp";
     element.className = player;
     document.getElementById("playerMove").innerHTML = dict["color" + player] + " Move";
