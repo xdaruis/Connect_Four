@@ -83,17 +83,17 @@ const winnerCombos = [
 const WIN_COMBINATIONS = 69;
 const movesYellow = [], movesBlue = [];
 
-let player = "btn btn-warning";
+let player = "Yellow";
 let moves = 42;
 let gameState = true;
 
 const dict = {
-    "movesbtn btn-warning": movesYellow,
-    "movesbtn btn-primary": movesBlue,
-    "colorbtn btn-warning": "Blue",
-    "colorbtn btn-primary": "Yellow",
-    "btn btn-warning": "btn btn-primary",
-    "btn btn-primary": "btn btn-warning"
+    "movesYellow": movesYellow,
+    "movesBlue": movesBlue,
+    "Yellow": "btn btn-warning",
+    "Blue": "btn btn-primary",
+    "nextYellow": "Blue",
+    "nextBlue": "Yellow"
 };
 
 function isWinner() {
@@ -106,7 +106,7 @@ function isWinner() {
             }
         }
         if (hasWon) {
-            document.getElementById("playerMove").innerHTML = dict["color" + dict[player]] + " has won!";
+            document.getElementById("playerMove").innerHTML = player + " has won!";
             gameState = false;
         }
     }
@@ -128,10 +128,10 @@ function colorButton(element) {
     }
     element.disabled = true;
     element.innerHTML = "&nbsp;&nbsp";
-    element.className = player;
-    document.getElementById("playerMove").innerHTML = dict["color" + player] + " Move";
+    element.className = dict[player];
+    document.getElementById("playerMove").innerHTML = dict["next" + player] + " Move";
     dict["moves" + player].push(element.id);
     isWinner();
-    player = dict[player];
+    player = dict["next" + player];
     activateAboveButton(element);
 }
