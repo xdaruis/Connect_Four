@@ -1,3 +1,28 @@
+document.onload = createBoard();
+
+function createBoard() {
+    for (let j = 5; j >= 1; --j) {
+        createLine(j, true, "&nbsp;&nbsp;");
+    }
+    createLine("0", false, "X");
+}
+
+function createLine(j, disabledState, text) {
+    const newBox = document.createElement("div");
+    newBox.className = "d-flex justify-content-center";
+    document.body.appendChild(newBox);
+    for (let i = 0; i <= 6; ++i) {
+        const button = document.createElement("button");
+        const aux = String.fromCharCode(97 + i);
+        button.id = aux + j;
+        button.className = "btn btn-outline-secondary";
+        button.innerHTML = text;
+        button.disabled = disabledState;
+        button.onclick= function() { colorButton(this); };
+        newBox.appendChild(button);
+    }
+}
+
 const winnerCombos = [
     ["a0", "b0", "c0", "d0"],
     ["a0", "b1", "c2", "d3"],
