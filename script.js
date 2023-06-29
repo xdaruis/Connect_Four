@@ -15,7 +15,7 @@ function createLine(j, disabledState, text) {
         const button = document.createElement("button");
         button.id = "" + j + i;
         button.className = "btn btn-outline-secondary";
-        button.innerHTML = "" + button.id;
+        button.innerHTML = text;
         button.disabled = disabledState;
         button.onclick= function() { colorButton(this); };
         newBox.appendChild(button);
@@ -23,52 +23,40 @@ function createLine(j, disabledState, text) {
 }
 
 const winnerCombos = [];
-
-let combosNum = 0; //69
+let combosNum = 0;
 
 document.onload = generateWinCombinations();
 
 function generateWinCombinations() {
     winnerCombos[0] = [];
-    for (let i = 0; i < 6; ++i) {
-        for (let j = 0; j < 4; ++j) {
+    actCombo(0, 6, 4, "lines");
+    actCombo(0, 3, 4, "secondDiag");
+    actCombo(3, 6, 4, "mainDiag");
+    actCombo(0, 7, 3, "columns");
+    console.log(combosNum);
+}
+
+function actCombo(startI ,iMax, jMax, actCombo) {
+    for (let i = startI; i < iMax; ++i) {
+        for (let j = 0; j < jMax; ++j) {
             for (let k = 0; k < 4; ++k) {
-                winnerCombos[combosNum].push("" + i + (j + k));
+                pushFormula(actCombo, i, j, k);
             }
-            // console.log(winnerCombos[combosNum]);
-            ++combosNum;
-            winnerCombos[combosNum] = [];
-        }
-    }
-    for (let i = 0; i < 3; ++i) {
-        for (let j = 0; j < 4; ++j) {
-            for (let k = 0; k < 4; ++k) {
-                winnerCombos[combosNum].push("" + (i + k) + (j + k));
-            }
-            // console.log(winnerCombos[combosNum]);
-            ++combosNum;
-            winnerCombos[combosNum] = [];
-        }
-    }
-    for (let i = 3; i < 6; ++i) {
-        for (let j = 0; j < 4; ++j) {
-            for (let k = 0; k < 4; ++k) {
-                winnerCombos[combosNum].push("" + (i - k) + (j + k));
-            }
-            // console.log(winnerCombos[combosNum]);
             winnerCombos[++combosNum] = [];
         }
     }
-    for (let i = 0; i < 7; ++i) {
-        for (let j = 0; j < 3; ++j) {
-            for (let k = 0; k < 4; ++k) {
-                winnerCombos[combosNum].push("" + (j + k) + i);
-            }
-            // console.log(winnerCombos[combosNum]);
-            winnerCombos[++combosNum] = [];
-        }
+}
+
+function pushFormula(actCombo, i, j, k) {
+    if (actCombo === "lines") {
+        winnerCombos[combosNum].push("" + i + (j + k));
+    } else if(actCombo === "secondDiag") {
+        winnerCombos[combosNum].push("" + (i + k) + (j + k));
+    } else if (actCombo === "mainDiag") {
+        winnerCombos[combosNum].push("" + (i - k) + (j + k));
+    } else {
+        winnerCombos[combosNum].push("" + (j + k) + i);
     }
-    // console.log(combosNum);
 }
 
 const movesYellow = [], movesBlue = [];
@@ -109,7 +97,7 @@ function isWinner() {
 function activateAboveButton(element) {
     let aboveId = element.id;
     document.getElementById(++aboveId[0] + aboveId[1]).disabled = false;
-    document.getElementById(++aboveId[0] + ++aboveId[1]).innerHTML = "X";
+    document.getElementById(++aboveId[0] + aboveId[1]).innerHTML = "X";
 }
 
 function colorButton(element) {
