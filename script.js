@@ -33,7 +33,6 @@ function generateWinCombinations() {
     actCombo(0, 3, 4, "secondDiag");
     actCombo(3, 6, 4, "mainDiag");
     actCombo(0, 7, 3, "columns");
-    console.log(combosNum);
 }
 
 function actCombo(startI ,iMax, jMax, actCombo) {
